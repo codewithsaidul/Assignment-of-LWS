@@ -1,3 +1,4 @@
+import BookingForm from './component/BookingForm'
 import Header from './component/Header'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <Header />
+      <BookingForm />
     </>
   )
 }
