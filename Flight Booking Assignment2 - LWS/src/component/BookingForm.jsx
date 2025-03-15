@@ -1,7 +1,10 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { AddFlight } from '../redux/action';
 
 const BookingForm = () => {
 
+    const dispatch = useDispatch()
     const handleSubmit = e => {
         e.preventDefault();
 
@@ -16,6 +19,8 @@ const BookingForm = () => {
         const data = {
             bookingId, fromDesti, toDesti, journeyDate, guest, ticketClass   
         }
+
+        dispatch(AddFlight(data))
 
         console.log(data)
     }
