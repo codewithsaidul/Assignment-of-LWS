@@ -1,5 +1,6 @@
 import BookingForm from './component/BookingForm'
 import Header from './component/Header'
+import TableData from './component/TableData'
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <Header />
       <BookingForm />
+      <TableData />
     </>
   )
 }
