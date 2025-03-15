@@ -1,13 +1,13 @@
 const Header = () => {
   return (
     <header id="header">
-      <div class="container">
-        <img src="./img/lws-logo.svg" alt="logo" class="logo" />
-        <div class="flex items-center">
-          <a class="text-white min-w-[50px] font-medium" href="#">
+      <div className="container">
+        <img src="./img/lws-logo.svg" alt="logo" className="logo" />
+        <div className="flex items-center">
+          <a className="text-white min-w-[50px] font-medium" href="#">
             Home
           </a>
-          <button class="log-btn btn">Login</button>
+          <button className="log-btn btn">Login</button>
         </div>
       </div>
     </header>
