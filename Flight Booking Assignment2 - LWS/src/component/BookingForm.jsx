@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux';
 import { AddFlight } from '../redux/action';
 
@@ -12,17 +11,15 @@ const BookingForm = () => {
         const bookingId = Date.now()
         const fromDesti = form.from.value;
         const toDesti = form.to.value;
-        const journeyDate = form.date.value;
+        const bookingDate = form.date.value;
         const guest = form.guests.value;
         const ticketClass = form.ticketClass.value
 
         const data = {
-            bookingId, fromDesti, toDesti, journeyDate, guest, ticketClass   
+            bookingId, fromDesti, toDesti, bookingDate, guest, ticketClass   
         }
 
         dispatch(AddFlight(data))
-
-        console.log(data)
     }
 
   return (
