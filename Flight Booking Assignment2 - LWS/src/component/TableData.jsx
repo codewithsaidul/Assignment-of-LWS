@@ -1,12 +1,22 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteFlight } from "../redux/action";
+import { DeleteFlight, Reset_Message } from "../redux/action";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const TableData = () => {
   const flightBooking = useSelector((state) => state.flightBooking);
   const dispatch = useDispatch();
 
-  // console.log(flightBooking);
+
+  useEffect(() => {
+    if (flightBooking.error) {
+      toast.success("Successfully Booking Deleted");
+
+      setTimeout(() => {
+        dispatch(Reset_Message())
+      }, 1000)
+    }
+  }, [dispatch, flightBooking.error])
 
   const handleDeleteBooking = (id) => {
     dispatch(DeleteFlight(id));
@@ -15,7 +25,7 @@ const TableData = () => {
   return (
     // <!-- Preview Data -->
     <div className="table-container">
-      {flightBooking.length > 0 && (
+      {flightBooking.flights.length > 0 && (
         <table className="booking-table">
           <thead className="bg-gray-100/50">
             <tr className="text-black text-left">
@@ -30,7 +40,7 @@ const TableData = () => {
           <tbody className="divide-y divide-gray-300/20" id="lws-previewBooked">
             {/* <!-- Row 1 --> */}
 
-            {flightBooking.map((booking) => (
+            {flightBooking.flights.map((booking) => (
               <tr
                 key={booking.bookingId}
                 className="lws-bookedTable text-black"
