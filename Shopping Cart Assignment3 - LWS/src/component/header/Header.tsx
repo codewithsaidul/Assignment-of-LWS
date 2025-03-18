@@ -1,3 +1,5 @@
+import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 
 const Header = ({ setPage }: { setPage: (value: string) => void }) => {
@@ -36,7 +38,10 @@ const Header = ({ setPage }: { setPage: (value: string) => void }) => {
               className="navCart"
               id="lws-cart"
             >
-              <i className="text-xl fa-sharp fa-solid fa-bag-shopping"></i>
+              <FontAwesomeIcon
+                icon={faBagShopping}
+                className="text-lg fa-sharp fa-solid fa-bag-shopping"
+              />
               <span id="lws-totalCart">0</span>
             </button>
           </div>
