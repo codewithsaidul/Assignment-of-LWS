@@ -1,5 +1,13 @@
+import Products from "../../component/home/Products";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <main className="py-16">
+      <div>
+        <Products />
+      </div>
+    </main>
+  );
 };
 
 export default Home;
