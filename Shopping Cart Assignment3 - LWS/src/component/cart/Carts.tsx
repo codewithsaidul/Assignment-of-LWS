@@ -1,4 +1,4 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Carts = () => {
@@ -29,11 +29,11 @@ const Carts = () => {
           {/* <!-- amount buttons --> */}
           <div className="flex items-center space-x-4">
             <button className="lws-incrementQuantity">
-              <i className="text-lg fa-solid fa-plus"></i>
+              <FontAwesomeIcon icon={faPlus} className="text-lg" />
             </button>
             <span className="lws-cartQuantity">2</span>
             <button className="lws-decrementQuantity">
-              <i className="text-lg fa-solid fa-minus"></i>
+              <FontAwesomeIcon icon={faMinus} className="text-lg" />
             </button>
           </div>
           {/* <!-- price --> */}

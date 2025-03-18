@@ -1,3 +1,4 @@
+import Billings from "../../component/cart/Billings";
 import Carts from "../../component/cart/Carts";
 
 const Cart = () => {
@@ -8,6 +9,7 @@ const Cart = () => {
 
         <div className="cartListContainer">
           <Carts />
+          <Billings />
         </div>
       </div>
     </main>
