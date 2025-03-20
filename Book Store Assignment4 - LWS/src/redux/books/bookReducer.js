@@ -2,7 +2,7 @@ import { ADDED, DELETED, LOADED, SEARCHBOOKS, UPADTED } from "./actionTypes";
 
 const initialState = {
   books: [],
-  selectedBook: [],
+  selectedBook: null,
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -23,7 +23,7 @@ const bookReducer = (state = initialState, action) => {
     case DELETED:
         return state.filter(book => book.id !== action.payload)
     default:
-      break;
+      return state;
   }
 };
 
