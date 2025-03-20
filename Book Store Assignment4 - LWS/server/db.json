@@ -26,6 +26,33 @@
       "rating": 4,
       "featured": true,
       "id": 4
+    },
+    {
+      "name": "Apple Mac Book Air Gold Version",
+      "author": "saidul",
+      "thumbnail": "gdgsdfsfsfsfsfs",
+      "price": "250",
+      "rating": "5",
+      "featured": false,
+      "id": 5
+    },
+    {
+      "name": "Apple Iphone 16 Pro Max",
+      "author": "saidul",
+      "thumbnail": "fsdfsdfsdfsd",
+      "price": "750",
+      "rating": 4,
+      "featured": true,
+      "id": 6
+    },
+    {
+      "name": "মারহাবা জাভাস্ক্রিপ্টে মারো থাবা",
+      "author": "Jhankar Mahbub",
+      "thumbnail": "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Marhaba_Javascripte_Maro_Thaba-Jhankar_Mahbub-5c238-455936.jpg",
+      "price": "585",
+      "rating": 5,
+      "featured": true,
+      "id": 7
     }
   ]
 }

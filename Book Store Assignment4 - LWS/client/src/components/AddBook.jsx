@@ -1,11 +1,39 @@
-import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import addBook from "../redux/thunk/addBook";
 
 const AddBook = () => {
+  const [isChecked, setIsChecked] = useState(false)
+  const dispatch = useDispatch()
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const author = form.author.value;
+    const thumbnail = form.thumbnail.value;
+    const price = form.price.value;
+    const rating = parseInt(form.rating.value);
+    const featured = isChecked;
+
+    const book = {
+      name, author, thumbnail, price, rating, featured
+    }
+
+    console.log(typeof book.rating)
+
+    dispatch(addBook(book))
+    form.reset()
+    setIsChecked(false)
+  }
+
   return (
     <div>
       <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
         <h4 className="mb-8 text-xl font-bold text-center">Add New Book</h4>
-        <form className="book-form">
+        <form onSubmit={handleSubmit} className="book-form">
           <div className="space-y-2">
             <label htmlFor="name">Book Name</label>
             <input
@@ -70,6 +98,8 @@ const AddBook = () => {
               id="input-Bookfeatured"
               type="checkbox"
               name="featured"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
               className="w-4 h-4"
             />
             <label htmlFor="featured" className="ml-2 text-sm">
