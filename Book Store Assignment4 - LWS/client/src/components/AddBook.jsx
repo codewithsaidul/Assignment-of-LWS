@@ -22,8 +22,6 @@ const AddBook = () => {
       name, author, thumbnail, price, rating, featured
     }
 
-    console.log(typeof book.rating)
-
     dispatch(addBook(book))
     form.reset()
     setIsChecked(false)

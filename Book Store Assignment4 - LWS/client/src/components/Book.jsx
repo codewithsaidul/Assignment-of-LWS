@@ -1,8 +1,17 @@
+import { useDispatch } from "react-redux";
+import deleteBook from "../redux/thunk/deleteBook";
+import fetchBooks from "../redux/thunk/fetchBooks";
 import StarRating from "./StarRating";
 
 const Book = ({ book }) => {
 
-  const { name, author, thumbnail, price, rating, featured } = book;
+  const dispatch = useDispatch()
+  const { id, name, author, thumbnail, price, rating, featured } = book;
+
+  const handleDelete = (bookId) => {
+    dispatch(deleteBook(bookId))
+    dispatch(fetchBooks())
+  }
 
   return (
     <div className="book-card">
@@ -32,7 +41,7 @@ const Book = ({ book }) => {
                 />
               </svg>
             </button>
-            <button className="lws-delete">
+            <button onClick={() => handleDelete(id)} className="lws-delete">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
