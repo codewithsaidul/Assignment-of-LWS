@@ -1,4 +1,4 @@
-import { ADDED, DELETED, LOADED, SEARCHBOOKS, UPADTED } from "./actionTypes";
+import { ADDED, DELETED, LOADED, UPADTED } from "./actionTypes";
 
 const initialState = {
   books: [],
@@ -38,8 +38,6 @@ const bookReducer = (state = initialState, action) => {
           ? { ...book, selectedBook: action.payload }
           : book;
       });
-    case SEARCHBOOKS:
-      return state.map((book) => book.name === action.payload);
     case DELETED:
       return {
         ...state,

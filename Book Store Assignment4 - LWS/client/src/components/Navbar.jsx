@@ -1,4 +1,17 @@
+
+import { useDispatch } from "react-redux";
+import { searchBooks } from "../redux/searchBooks/action";
 const Navbar = () => {
+ const dispatch = useDispatch()
+  
+
+ const handleSearch = (e) => {
+  e.preventDefault()
+  dispatch(searchBooks(e.target.value)); // Update search state
+};
+
+
+
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
@@ -11,7 +24,7 @@ const Navbar = () => {
         </ul>
 
         <form className="flex items-center">
-          <div className="group relative rounded-md bg-white">
+          <div onChange={handleSearch} className="group relative rounded-md bg-white">
             <svg
               width="20"
               height="20"
