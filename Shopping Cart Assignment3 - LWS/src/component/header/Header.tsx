@@ -1,8 +1,25 @@
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/rootReducer";
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
 
 const Header = ({ setPage }: { setPage: (value: string) => void }) => {
+  const cartItem = useSelector((state: RootState) => state.cartsProduct);
+  const cartCount = cartItem.reduce(
+    (prev: number, current: Product) => prev + current.quantity,
+    0
+  );
+
   useEffect(() => {
     // Listen to browser navigation (Back/Forward)
     window.onpopstate = () => {
@@ -42,7 +59,7 @@ const Header = ({ setPage }: { setPage: (value: string) => void }) => {
                 icon={faBagShopping}
                 className="text-lg fa-sharp fa-solid fa-bag-shopping"
               />
-              <span id="lws-totalCart">0</span>
+              <span id="lws-totalCart">{cartCount}</span>
             </button>
           </div>
         </div>

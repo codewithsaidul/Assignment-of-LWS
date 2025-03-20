@@ -940,6 +940,10 @@ video {
   background-color: rgb(23 28 42 / 0.8);
 }
 
+.lws-btnAddToCart:disabled {
+  background-color: rgb(23 28 42 / 0.8);
+}
+
 .lws-btnAddToCart:active {
   --tw-bg-opacity: 1;
   background-color: rgb(23 28 42 / var(--tw-bg-opacity));
