@@ -1,6 +1,17 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import fetchBooks from "../redux/thunk/fetchBooks";
 
 const BookList = () => {
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchBooks)
+  }, [dispatch])
+
+
   return (
     <div className="order-2 xl:-order-1">
       <div className="flex items-center justify-between mb-12">
