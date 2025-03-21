@@ -1,17 +1,12 @@
-import { ADDED, DELETED, LOADED, UPADTED } from "./actionTypes";
+import { ADDED, DELETED, EDITED, LOADED, UPADTED } from "./actionTypes";
 
 const initialState = {
   books: [],
-  selectedBook: {
-    name: "saidul",
-    age: 23,
-    phone: "01763079580",
-    occupation: "bekar",
-  },
+  selectedBook: null
 };
 
-const nextTodoId = (todos) => {
-  const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1);
+const nextBookId = (books) => {
+  const maxId = books.reduce((maxId, book) => Math.max(book.id, maxId), -1);
   return maxId + 1;
 };
 
@@ -25,19 +20,26 @@ const bookReducer = (state = initialState, action) => {
     case ADDED: {
       const newBook = {
         ...action.payload,
-        id: nextTodoId(state.books),
+        id: nextBookId(state.books),
       };
       return {
         ...state,
         books: [...state.books, newBook],
       };
     }
+    case EDITED:
+      return {
+        ...state,
+        selectedBook: action.payload
+      }
     case UPADTED:
-      return state.map((book) => {
-        book.id === action.payload.bookId
-          ? { ...book, selectedBook: action.payload }
-          : book;
-      });
+      return {
+        ...state,
+        books: state.books.map(book =>
+          book.id === action.payload.id ? action.payload : book
+        ),
+        selectedBook: null, // আপডেটের পর ফর্ম রিসেট
+      };
     case DELETED:
       return {
         ...state,

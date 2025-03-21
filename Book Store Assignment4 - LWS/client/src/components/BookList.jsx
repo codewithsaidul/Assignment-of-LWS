@@ -34,7 +34,6 @@ const BookList = () => {
   const filterBySearch = (book) => book.name.toLowerCase().includes(query.toLowerCase());
 
 
-
   return (
     <div className="order-2 xl:-order-1">
       <div className="flex items-center justify-between mb-12">

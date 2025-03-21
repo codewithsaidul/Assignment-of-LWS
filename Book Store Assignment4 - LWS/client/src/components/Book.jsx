@@ -1,17 +1,21 @@
 import { useDispatch } from "react-redux";
+import { edited } from "../redux/books/action";
 import deleteBook from "../redux/thunk/deleteBook";
 import fetchBooks from "../redux/thunk/fetchBooks";
 import StarRating from "./StarRating";
 
 const Book = ({ book }) => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { id, name, author, thumbnail, price, rating, featured } = book;
 
   const handleDelete = (bookId) => {
-    dispatch(deleteBook(bookId))
-    dispatch(fetchBooks())
-  }
+    dispatch(deleteBook(bookId));
+    dispatch(fetchBooks());
+  };
+
+  const handleUpadte = (book) => {
+    dispatch(edited(book));
+  };
 
   return (
     <div className="book-card">
@@ -22,11 +26,11 @@ const Book = ({ book }) => {
       />
       <div className="flex-1 h-full pr-2 pt-2 flex flex-col">
         <div className="flex items-center justify-between">
-          {
-            featured && <span className="badge-success lws-Badge">featured</span>
-          }
+          {featured && (
+            <span className="badge-success lws-Badge">featured</span>
+          )}
           <div className="text-gray-500 space-x-2">
-            <button className="lws-edit">
+            <button onClick={() => handleUpadte(book)} className="lws-edit">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -60,9 +64,7 @@ const Book = ({ book }) => {
         </div>
 
         <div className="space-y-2 mt-4 h-full">
-          <h4 className="lws-bookName">
-            {name}
-          </h4>
+          <h4 className="lws-bookName">{name}</h4>
           <p className="lws-author">{author}</p>
           <StarRating rating={rating} />
           <p className="lws-price">BDT {price}</p>

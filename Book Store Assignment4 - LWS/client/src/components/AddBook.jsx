@@ -1,31 +1,68 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import addBook from "../redux/thunk/addBook";
+import fetchBooks from "../redux/thunk/fetchBooks";
+import updateBook from "../redux/thunk/updateBook";
 
 const AddBook = () => {
-  const [isChecked, setIsChecked] = useState(false)
-  const dispatch = useDispatch()
+  const selectedBook = useSelector((state) => state.books.selectedBook);
+  const [book, setBook] = useState({
+    name: "",
+    author: "",
+    thumbnail: "",
+    price: "",
+    rating: "",
+    featured: false,
+  });
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (selectedBook) {
+      setBook(selectedBook);
+    }
+  }, [selectedBook]);
+
+  const handleCheckboxChange = () => {
+    setBook((prevBook) => ({
+      ...prevBook,
+      featured: !prevBook.featured, // আগের স্টেটের বিপরীতে টগল করবে
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setBook((prevBook) => ({
+      ...prevBook,
+      [name]:
+        name === "price" || name === "rating"
+          ? value === ""
+            ? ""
+            : Number(value) // ফাঁকা হলে "" রাখবে, নাহলে নাম্বার করবে
+          : value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const name = form.name.value;
-    const author = form.author.value;
-    const thumbnail = form.thumbnail.value;
-    const price = form.price.value;
-    const rating = parseInt(form.rating.value);
-    const featured = isChecked;
-
-    const book = {
-      name, author, thumbnail, price, rating, featured
+    if (selectedBook) {
+      dispatch(updateBook(book));
+      dispatch(fetchBooks());
+    } else {
+      dispatch(addBook(book)); // ফর্ম সাবমিট হলে কনসোলে বই দেখাও
     }
 
-    dispatch(addBook(book))
-    form.reset()
-    setIsChecked(false)
-  }
+    // 📌 সাবমিট হওয়ার পর ফর্ম রিসেট
+    setBook({
+      name: "",
+      author: "",
+      thumbnail: "",
+      price: "",
+      rating: "",
+      featured: false,
+    });
+  };
 
   return (
     <div>
@@ -40,6 +77,8 @@ const AddBook = () => {
               type="text"
               id="input-Bookname"
               name="name"
+              value={book.name}
+              onChange={handleChange}
             />
           </div>
 
@@ -51,6 +90,8 @@ const AddBook = () => {
               type="text"
               id="input-Bookauthor"
               name="author"
+              value={book.author}
+              onChange={handleChange}
             />
           </div>
 
@@ -62,6 +103,8 @@ const AddBook = () => {
               type="text"
               id="input-Bookthumbnail"
               name="thumbnail"
+              value={book.thumbnail}
+              onChange={handleChange}
             />
           </div>
 
@@ -74,6 +117,8 @@ const AddBook = () => {
                 type="number"
                 id="input-Bookprice"
                 name="price"
+                value={book.price}
+                onChange={handleChange}
               />
             </div>
 
@@ -87,6 +132,8 @@ const AddBook = () => {
                 name="rating"
                 min="1"
                 max="5"
+                value={book.rating}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -96,8 +143,8 @@ const AddBook = () => {
               id="input-Bookfeatured"
               type="checkbox"
               name="featured"
-              checked={isChecked}
-              onChange={(e) => setIsChecked(e.target.checked)}
+              checked={book.featured}
+              onChange={handleCheckboxChange}
               className="w-4 h-4"
             />
             <label htmlFor="featured" className="ml-2 text-sm">
@@ -106,7 +153,7 @@ const AddBook = () => {
           </div>
 
           <button type="submit" className="submit" id="submit">
-            Add Book
+            {selectedBook ? "Update Book" : "Add Book"}
           </button>
         </form>
       </div>
