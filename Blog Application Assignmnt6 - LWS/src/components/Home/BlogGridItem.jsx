@@ -4,7 +4,7 @@ const BlogGridItem = () => {
   return (
     <div className="lws-card">
       <a href="post.html">
-        <img src="./images/git.webp" className="lws-card-image" alt="" />
+        <img src="/images/git.webp" className="lws-card-image" alt="" />
       </a>
       <div className="p-4">
         <div className="lws-card-header">
