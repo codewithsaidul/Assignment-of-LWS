@@ -1,8 +1,13 @@
+import BlogGrid from "../components/Home/BlogGrid"
+import LeftSidebar from "../components/Home/LeftSidebar"
 
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <main class="wrapper">
+      <LeftSidebar />
+      <BlogGrid />
+    </main>
   )
 }
 
