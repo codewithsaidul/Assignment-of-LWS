@@ -4,7 +4,7 @@ import LeftSidebar from "../components/Home/LeftSidebar"
 
 const Home = () => {
   return (
-    <main class="wrapper">
+    <main className="wrapper">
       <LeftSidebar />
       <BlogGrid />
     </main>

@@ -21,9 +21,9 @@ const SingleBlog = () => {
 
 
       {/* ================= Main Content of Details Page ================= */}
-      <main class="post-page-container">
+      <main className="post-page-container">
             {/* Details of Blog */}
-            <div class="post">
+            <div className="post">
                 <BlogDescripton />
             </div>
 

@@ -25,10 +25,10 @@ const LeftSidebar = () => {
                 type="radio"
                 name="filter"
                 id="lws-all"
-                checked
+                // checked
                 className="radio"
               />
-              <label for="lws-all">All</label>
+              <label htmlFor="lws-all">All</label>
             </div>
             <div>
               <input
@@ -37,7 +37,7 @@ const LeftSidebar = () => {
                 id="lws-saved"
                 className="radio"
               />
-              <label for="lws-saved">Saved</label>
+              <label htmlFor="lws-saved">Saved</label>
             </div>
           </div>
         </div>

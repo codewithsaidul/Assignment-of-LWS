@@ -3,7 +3,7 @@ import BlogGridItem from './BlogGridItem'
 
 const BlogGrid = () => {
   return (
-    <div class="post-container" id="lws-postContainer">
+    <div className="post-container" id="lws-postContainer">
         <BlogGridItem />
     </div>
   )
