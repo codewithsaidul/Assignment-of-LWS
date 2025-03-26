@@ -1,8 +1,11 @@
+import Navbar from "../components/Header/Navbar"
 
 
 const Layout = () => {
   return (
-    <div>Layout</div>
+    <div>
+        <Navbar />
+    </div>
   )
 }
 
