@@ -1,6 +1,22 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { filterBlog, sortBlog } from "../../features/filterBlogs/filterBlogsSlice";
 
 const LeftSidebar = () => {
+
+  const { selectOption, selectedCheckbox } = useSelector(state => state.filterBlogs)
+  const dispatch = useDispatch()
+
+
+  const handleSelectedOpton = (e) => {
+    const value = e.target.value;
+    dispatch(sortBlog(value))
+  }
+
+  const handleCheckBox = (checkbox) => {
+      dispatch(filterBlog(checkbox))
+  }
+
+
   return (
     <aside>
       <div className="sidebar-items">
@@ -10,6 +26,8 @@ const LeftSidebar = () => {
             name="sort"
             id="lws-sort"
             className="w-full max-w-[150px] border-2 rounded-md text-gray-500"
+            value={selectOption}
+            onChange={handleSelectedOpton}
           >
             <option value="">Default</option>
             <option value="newest">Newest</option>
@@ -25,7 +43,8 @@ const LeftSidebar = () => {
                 type="radio"
                 name="filter"
                 id="lws-all"
-                // checked
+                checked={selectedCheckbox === "all"}
+                onChange={() => handleCheckBox("all")}
                 className="radio"
               />
               <label htmlFor="lws-all">All</label>
@@ -36,6 +55,8 @@ const LeftSidebar = () => {
                 name="filter"
                 id="lws-saved"
                 className="radio"
+                checked={selectedCheckbox === "saved"}
+                onChange={() => handleCheckBox("saved")}
               />
               <label htmlFor="lws-saved">Saved</label>
             </div>

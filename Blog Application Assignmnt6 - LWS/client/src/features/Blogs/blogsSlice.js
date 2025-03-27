@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import fetchBlogs from './blogAPI'
+import fetchBlogs from './blogsAPI'
 
 
 const initialState = {
@@ -10,8 +10,8 @@ const initialState = {
 }
 
 
-export const fetchBlogsAsync = createAsyncThunk("blogs/fetchBlogs", async () => {
-    const blogs = await fetchBlogs()
+export const fetchBlogsAsync = createAsyncThunk("blogs/fetchBlogs", async ({sortOption, filter}) => {
+    const blogs = await fetchBlogs({sortOption, filter})
     return blogs
 })
 

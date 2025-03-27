@@ -1,10 +1,43 @@
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { BlogDescripton } from "../components/SingleBlog/BlogDescripton";
 import RelatedPosts from "../components/SingleBlog/RelatedPosts";
+import Loading from "../components/ui/Loading";
+import { fetchBlogAsync } from "../features/Blog/blogSlice";
 
 const SingleBlog = () => {
+  const { blogId } = useParams()
+  const dispatch = useDispatch()
+  const { blog, isLoading, isError, error } = useSelector(state => state.blog)
+
+  useEffect(() => {
+    dispatch(fetchBlogAsync(blogId))
+  }, [blogId, dispatch])
+
+
+  if (isLoading) return <Loading />
+
+  if (!isLoading && isError) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-210px)]">
+        <p className="text-4xl font-bold text-red-600">{error}</p>
+      </div>
+    )
+  }
+
+
+  if (!isLoading && !isError && Object.keys(blog).length === 0) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-210px)]">
+        <p className="text-4xl font-bold text-gray-500">Blogs Not Found!</p>
+      </div>
+    )
+  }
+
+
   return (
     <div>
       {/* <!-- Go Home / Go Back --> */}
@@ -24,12 +57,12 @@ const SingleBlog = () => {
       <main className="post-page-container">
             {/* Details of Blog */}
             <div className="post">
-                <BlogDescripton />
+                <BlogDescripton blog={blog} />
             </div>
 
             {/* Related Post */}
             <div>
-                <RelatedPosts />
+                <RelatedPosts id={blog.id} tags={blog.tags} />
             </div>
       </main>
     </div>
