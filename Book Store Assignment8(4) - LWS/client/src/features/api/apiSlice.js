@@ -16,10 +16,7 @@ export const apiSlice = createApi({
       providesTags: ["Books"],
     }),
     getBook: builder.query({
-      query: (id) => ({
-        url: `/books/${id}`,
-        method: "GET",
-      }),
+      query: (id) => `/books/${id}`,
       providesTags: (result, error, arg) => [
         {
           type: "Book",
@@ -46,7 +43,7 @@ export const apiSlice = createApi({
         { type: "Book", id: arg.id },
       ],
     }),
-    deleteVideo: builder.mutation({
+    deleteBook: builder.mutation({
       query: (id) => ({
         url: `/books/${id}`,
         method: "DELETE",
@@ -59,4 +56,10 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetBooksQuery, useGetBookQuery, useAddBookMutation, useEditBookMutation, useDeleteVideoMutation } = apiSlice;
+export const {
+  useGetBooksQuery,
+  useGetBookQuery,
+  useAddBookMutation,
+  useEditBookMutation,
+  useDeleteBookMutation,
+} = apiSlice;

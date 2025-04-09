@@ -26,6 +26,15 @@
       "rating": 4,
       "featured": true,
       "id": 4
+    },
+    {
+      "name": "মারহাবা, জাভাস্ক্রিপ্টে মারো থাবা",
+      "author": "Jhankar Mahbub",
+      "thumbnail": "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Marhaba_Javascripte_Maro_Thaba-Jhankar_Mahbub-5c238-455936.jpg",
+      "price": "785",
+      "rating": "4",
+      "featured": true,
+      "id": 5
     }
   ]
 }

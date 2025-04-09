@@ -1,47 +1,42 @@
-import { useState } from "react";
-import { useEditBookMutation } from "../../features/api/apiSlice";
+import React, { useState } from "react";
+import { useAddBookMutation } from "../../features/api/apiSlice";
 import Error from "../../ui/Error";
 import Success from "../../ui/Success";
 
-const EditForm = ({ book }) => {
-  const {
-    id,
-    name: initialName,
-    author: initialAuthor,
-    thumbnail: initialThumbnail,
-    price: initialPrice,
-    rating: initialRating,
-    featured: initialFeatured,
-  } = book || {};
+const AddForm = () => {
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [price, setPrice] = useState("");
+  const [rating, setRating] = useState("");
+  const [featured, setFeatured] = useState(false);
+  const [AddBook, { isLoading, isError, isSuccess }] = useAddBookMutation();
 
-  // console.log(initialName)
-  const [name, setName] = useState(initialName);
-  const [author, setAuthor] = useState(initialAuthor);
-  const [thumbnail, setThumbnail] = useState(initialThumbnail);
-  const [price, setPrice] = useState(initialPrice);
-  const [rating, setRating] = useState(initialRating);
-  const [featured, setFeatured] = useState(initialFeatured);
+  const resetForm = () => {
+    setName("");
+    setAuthor("");
+    setThumbnail("");
+    setPrice("");
+    setRating("");
+    setFeatured(false);
+  };
 
-  const [EditBook, { isLoading, isError, isSuccess }] = useEditBookMutation();
-
-  const handleEdit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    EditBook({
-      id,
-      data: {
-        name,
-        author,
-        thumbnail,
-        price,
-        rating,
-        featured,
-      },
+    AddBook({
+      name,
+      author,
+      thumbnail,
+      price,
+      rating,
+      featured,
     });
+    resetForm();
   };
 
   return (
-    <form onSubmit={handleEdit} className="book-form">
+    <form onSubmit={handleSubmit} className="book-form">
       <div className="space-y-2">
         <label>Book Name</label>
         <input
@@ -123,24 +118,27 @@ const EditForm = ({ book }) => {
         <label className="ml-2 text-sm"> This is a featured book </label>
       </div>
 
-      <button disabled={isLoading} type="submit" className="submit disabled:text-blue-300" id="lws-submit">
-        {
-          isLoading ? "Processing" : "Edit Book"
-        }
+      <button
+        disabled={isLoading}
+        type="submit"
+        className="submit disabled:text-blue-300"
+        id="lws-submit"
+      >
+        {isLoading ? "Processing..." : "Add Book"}
       </button>
 
-      {
-        isSuccess && <div className="py-5">
-          <Success message="Book Data Updated Successfully" />
+      {isSuccess && (
+        <div className="py-5">
+          <Success message="Book Added Successfully" />
         </div>
-      }
-      {
-        isError && <div className="py-5">
-          <Error message="There was an error" />
+      )}
+      {isError && (
+        <div className="py-5">
+          <Error message="Something Went Wrong" />
         </div>
-      }
+      )}
     </form>
   );
 };
 
-export default EditForm;
+export default AddForm;
