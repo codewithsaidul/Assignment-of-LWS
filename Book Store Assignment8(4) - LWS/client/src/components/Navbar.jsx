@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { searchBooks } from "../features/booksFilter/filter";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
+  const dispatch  = useDispatch()
+
+  useEffect(() => {
+    dispatch(searchBooks(search))
+  }, [dispatch, search])
+
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
@@ -38,6 +48,8 @@ const Navbar = () => {
               placeholder="Filter books..."
               className="search"
               id="lws-search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </form>
